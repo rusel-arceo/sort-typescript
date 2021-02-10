@@ -1,23 +1,27 @@
-import { NumbersCollection } from './numbersCollection';
+//import { NumbersCollection } from './numbersCollection'; no es necesario usamos la interface
+
+//Crearemos nuestra interfase para que pordamos ordenar cualquier arreglo
+interface Sortable
+{
+    length:number,
+    compare (leftIndex:number, rightIndex:number):boolean, //los nombres de los parametros de la interface y el de las clases no tienen que llamarse igual, aunque si los tipos
+    swap(leftIndex:number, rightIndex:number):void    
+}
 
 export class Sorter
 {
     //collection:number[]; definiendolo de esa manera en el constructor ya no tenemos que hacerlo aquí
 
     //constructor(private collection:number[] | string) haremos el cambio para no tener que poner los parametros de esta manera
-    constructor(private collection: NumbersCollection)
+    constructor(private collection: Sortable) //Cualquiera que cumpla con Sortable puede usar el metodo
     {
         //this.collection=arreglo; Ya no es necesario por la forma en que se definio, automaticamente se vuelve una propiedad.
         
     }
 
-    getCollection():NumbersCollection
-    {
-        return this.collection;
-    }
-
+    
     //Como collection puede ser un arreglo de numeros o un string, al union de sus metodos no coincide mas que en el acceso a sus indice pero sin pode modificar, para esto usaremos
-    makeSort():NumbersCollection
+    makeSort():void
     {
         //let max=this.collection.length-1;
         let { length } = this.collection; //desestructuramos
@@ -46,7 +50,6 @@ export class Sorter
                //if(typeof this.collection ==='string')
             }
         }    
-        return this.collection;
     }
 }
 
